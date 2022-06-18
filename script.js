@@ -11,22 +11,29 @@ const API_LINK = 'https://api.openweathermap.org/data/2.5/weather'
 const API_KEY = '&appid=67dcbf7a2ea60a3e9ffee282d9871218'
 const API_UNITS = '&units=metric'
 
-const showWeather = response => {
-    const temp = Math.round(response.data.main.temp) + '℃'
-    const description = response.data.weather[ 0 ].description
-    const correctDesc = convertDescription(description)
-    const hum = response.data.main.humidity + '%'
-    weather.textContent = correctDesc
-    temperature.textContent = temp
-    humidity.textContent = hum
-}
-
 const convertDescription = desc => {
     const arr = desc.split(' ')
     for (let i = 0; i < arr.length; i++) {
         arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1)
     }
     return arr.join(' ')
+}
+
+const getWeatherIcon = icon => {
+     return `http://openweathermap.org/img/wn/${icon}@2x.png`
+};
+
+const showWeather = response => {
+    const temp = Math.round(response.data.main.temp) + '℃'
+    const description = response.data.weather[0].description
+    const correctDesc = convertDescription(description)
+    const hum = response.data.main.humidity + '%'
+    const icon = getWeatherIcon(response.data.weather[0].icon)
+
+    weather.textContent = correctDesc
+    temperature.textContent = temp
+    humidity.textContent = hum
+    photo.setAttribute('src', icon)
 }
 
 async function getWeather() {
