@@ -1,12 +1,10 @@
 const input = document.querySelector('input')
 const button = document.querySelector('button')
-const cityName = document.querySelector('.city-name')
 const warning = document.querySelector('.warning')
 const photo = document.querySelector('.photo')
 const weather = document.querySelector('.weather')
 const temperature = document.querySelector('.temperature')
 const humidity = document.querySelector('.humidity')
-const axios = require('axios').default
 
 const API_LINK = 'https://api.openweathermap.org/data/2.5/weather'
 const API_KEY = '&appid=67dcbf7a2ea60a3e9ffee282d9871218'
@@ -44,10 +42,16 @@ async function getWeather() {
     try {
         const response = await axios.get(URL);
         showWeather(response)
-    } catch (error) {
-        console.error(error);
+    } catch (err) {
+        warning.textContent = 'Incorrect city name'
     }
 }
 
 button.addEventListener('click', getWeather)
+input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault()
+        showWeather()
+    }
+})
 
