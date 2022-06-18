@@ -6,6 +6,7 @@ const photo = document.querySelector('.photo')
 const weather = document.querySelector('.weather')
 const temperature = document.querySelector('.temperature')
 const humidity = document.querySelector('.humidity')
+const axios = require('axios').default
 
 const API_LINK = 'https://api.openweathermap.org/data/2.5/weather'
 const API_KEY = '&appid=67dcbf7a2ea60a3e9ffee282d9871218'
