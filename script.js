@@ -38,12 +38,14 @@ const showWeather = response => {
 async function getWeather() {
     const city = `q=${input.value}`
     const URL = `${API_LINK}?${city}${API_UNITS}${API_KEY}`
-
     try {
         const response = await axios.get(URL);
         showWeather(response)
     } catch (err) {
-        warning.textContent = 'Incorrect city name'
+        console.error(err.message)
+        if (err.response.status === 400 || err.response.status === 404) {
+            warning.textContent = 'Enter correct location name'
+        }
     }
 }
 
@@ -51,7 +53,7 @@ button.addEventListener('click', getWeather)
 input.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         e.preventDefault()
-        showWeather()
+        getWeather()
     }
 })
 
