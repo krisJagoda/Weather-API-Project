@@ -1,3 +1,5 @@
+import API_KEY from "./apikey"
+
 const input = document.querySelector('input')
 const button = document.querySelector('button')
 const warning = document.querySelector('.warning')
@@ -7,7 +9,6 @@ const temperature = document.querySelector('.temperature')
 const humidity = document.querySelector('.humidity')
 
 const API_LINK = 'https://api.openweathermap.org/data/2.5/weather'
-const API_KEY = '&appid=67dcbf7a2ea60a3e9ffee282d9871218'
 const API_UNITS = '&units=metric'
 
 const convertDescription = desc => {
