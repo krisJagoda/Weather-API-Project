@@ -9,7 +9,7 @@ const temperature = document.querySelector('.temperature')
 const humidity = document.querySelector('.humidity')
 
 const API_LINK = 'https://api.openweathermap.org/data/2.5/weather'
-const API_UNITS = '&units=metric'
+const API_UNITS = 'metric'
 
 const convertDescription = desc => {
     const arr = desc.split(' ')
@@ -20,8 +20,8 @@ const convertDescription = desc => {
 }
 
 const getWeatherIcon = icon => {
-     return `http://openweathermap.org/img/wn/${icon}@2x.png`
-};
+     return `https://openweathermap.org/img/wn/${icon}@2x.png`
+}
 
 const showWeather = response => {
     const temp = Math.round(response.data.main.temp) + '℃'
@@ -37,10 +37,9 @@ const showWeather = response => {
 }
 
 async function getWeather() {
-    const city = `q=${input.value}`
-    console.log(API_KEY, 1324)
-    const URL = `${API_LINK}?${city}${API_UNITS}${API_KEY}`
-    console.log(URL, 1234);
+    const city = `${input.value}`
+    const URL = `${API_LINK}?q=${city}&units=${API_UNITS}&appid=${API_KEY}`
+
     try {
         const response = await axios.get(URL);
         showWeather(response)
