@@ -1,4 +1,4 @@
-import API_KEY from "./apikey"
+import API_KEY from "./apikey.mjs"
 
 const input = document.querySelector('input')
 const button = document.querySelector('button')
@@ -38,7 +38,9 @@ const showWeather = response => {
 
 async function getWeather() {
     const city = `q=${input.value}`
+    console.log(API_KEY, 1324)
     const URL = `${API_LINK}?${city}${API_UNITS}${API_KEY}`
+    console.log(URL, 1234);
     try {
         const response = await axios.get(URL);
         showWeather(response)
